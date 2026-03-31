@@ -5,12 +5,12 @@ import { getImagePrefix } from "@/utils/utils";
 
 const Upgrade = () => {
   return (
-    <section className="md:py-40 py-20 bg-white" id="upgrade">
+    <section className="md:py-40 py-20 bg-cream" id="upgrade">
       <div className="container mx-auto lg:max-w-screen-xl px-4">
         <div className="grid lg:grid-cols-2 sm:gap-0 gap-10 items-center">
           <div>
-            <p className="text-primary sm:text-28 text-18 mb-3">Premium</p>
-            <h2 className="text-midnight_text sm:text-40 text-30  font-medium mb-5">
+            <p className="font-display font-medium text-primary sm:text-28 text-18 mb-3">Premium</p>
+            <h2 className="font-display font-semibold text-midnight_text sm:text-40 text-30 tracking-tight mb-5">
               Upgrade Your Student Experience
             </h2>
             <p className="text-muted text-18 mb-7">

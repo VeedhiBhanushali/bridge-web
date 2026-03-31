@@ -4,12 +4,12 @@ import { signIn } from "next-auth/react";
 const SocialSignIn = () => {
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex gap-3 sm:flex-row flex-col">
         <button
+          type="button"
           //onClick={() => signIn("google")}
-          className="flex w-full items-center justify-center gap-2.5 rounded-lg p-3.5 hover:bg-slateGray bg-deepSlate text-white"
+          className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3.5 text-16 font-medium text-midnight_text shadow-sm transition-colors hover:bg-grey hover:border-primary/30"
         >
-          Sign In
           <svg
             width="23"
             height="22"
@@ -46,13 +46,14 @@ const SocialSignIn = () => {
               </clipPath>
             </defs>
           </svg>
+          Sign in with Google
         </button>
 
         <button
+          type="button"
          // onClick={() => signIn("github")}
-          className="flex w-full items-center justify-center gap-2.5 rounded-lg p-3.5 text-white bg-deepSlate hover:bg-slateGray"
+          className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-border bg-white px-4 py-3.5 text-16 font-medium text-midnight_text shadow-sm transition-colors hover:bg-grey hover:border-primary/30"
         >
-          Sign In
           <svg
             width="22"
             height="22"
@@ -65,6 +66,7 @@ const SocialSignIn = () => {
               fill="currentColor"
             />
           </svg>
+          Sign in with GitHub
         </button>
       </div>
     </>

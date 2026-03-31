@@ -17,7 +17,7 @@ const TimeLine = () => {
   };
 
   return (
-    <section className="md:pt-40 pt-9 bg-white" id="development">
+    <section className="md:pt-40 pt-9 bg-cream" id="development">
       <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md lg:px-16 px-4">
         <div className="text-center">
           <motion.div
@@ -25,10 +25,10 @@ const TimeLine = () => {
             initial={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-muted sm:text-28 text-18 mb-9">
+            <p className="font-display font-medium text-muted sm:text-28 text-18 mb-9">
               Student Journey <span className="text-primary">Timeline</span>
             </p>
-            <h2 className="text-midnight_text sm:text-40 text-30 font-medium lg:w-80% mx-auto mb-20">
+            <h2 className="font-display font-semibold text-midnight_text sm:text-40 text-30 tracking-tight lg:w-80% mx-auto mb-20">
               We guide you through every step of your university journey, from arrival to graduation.
             </h2>
           </motion.div>
@@ -43,7 +43,7 @@ const TimeLine = () => {
                   <div className="bg-gray-200 rounded-lg animate-pulse w-[600px] h-[450px]"></div>
                 )}
                 <Image
-                  src={`${getImagePrefix()}images/timeline/img-timeline.png?v=${Date.now()}`} 
+                  src={`${getImagePrefix()}images/timeline/img-timeline.png`} 
                   alt="Bridge App Timeline"
                   width={600}
                   height={450}

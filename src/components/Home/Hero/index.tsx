@@ -6,29 +6,22 @@ import { useEffect, useRef, useState, useCallback, lazy, Suspense } from "react"
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { getImagePrefix } from "@/utils/utils";
 
-// Lazy load the heavy components
+// Lazy load waitlist modal; slider loads with Hero to avoid chunk issues
 const BuyCrypto = lazy(() => import("./buy-form"));
-const SellCrypto = lazy(() => import("./sell-form"));
-const CardSlider = lazy(() => import("./slider"));
+import CardSlider from "./slider";
+
+const SURVEY_FORM_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
 
 const Hero = () => {
   const [isBuying, setIsBuyingOpen] = useState(false);
-  const [isSelling, setIsSellingOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const BuyRef = useRef<HTMLDivElement>(null);
-  const SellRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = useCallback(
-    (event: MouseEvent) => {
-      if (BuyRef.current && !BuyRef.current.contains(event.target as Node)) {
-        setIsBuyingOpen(false);
-      }
-      if (SellRef.current && !SellRef.current.contains(event.target as Node)) {
-        setIsSellingOpen(false);
-      }
-    },
-    []
-  );
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (BuyRef.current && !BuyRef.current.contains(event.target as Node)) {
+      setIsBuyingOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -38,7 +31,7 @@ const Hero = () => {
   }, [handleClickOutside]);
 
   useEffect(() => {
-    if (isBuying || isSelling) {
+    if (isBuying) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -46,7 +39,7 @@ const Hero = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isBuying, isSelling]);
+  }, [isBuying]);
 
   const leftAnimation = {
     initial: { x: "-100%", opacity: 0 },
@@ -64,45 +57,36 @@ const Hero = () => {
 
   return (
     <section
-      className="relative md:pt-40 md:pb-28 py-20 overflow-hidden z-1 bg-white"
+      className="relative md:pt-28 md:pb-24 py-14 overflow-hidden z-1 bg-cream"
       id="main-banner"
     >
       <div className="container mx-auto lg:max-w-screen-xl px-4 relative">
         <div className="grid grid-cols-12">
           <motion.div {...leftAnimation} className="lg:col-span-5 col-span-12">
-            <div className="flex gap-6 items-center lg:justify-start justify-center mb-5 mt-24">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <Image
-                  src={`${getImagePrefix()}images/icons/graduation-cap.png`}
-                  alt="Graduation Cap"
-                  width={40}
-                  height={40}
-                  className="w-8 h-8 object-contain"
-                />
-              </div>
-              <p className="text-midnight_text sm:text-28 text-18 mb-0">
-                Student Success <span className="text-primary">Platform</span>
-              </p>
+            <div className="flex gap-6 items-center lg:justify-start justify-center mt-7">
+             
             </div>
-            <h1 className="font-medium lg:text-76 md:text-70 text-54 lg:text-start text-center text-midnight_text mb-10">
-              Connect, and <span className="text-primary">Thrive</span> in your{" "}
-              <span className="text-primary">University Journey</span>!
+            <h1 className="font-display font-semibold lg:text-70 md:text-65 text-54 lg:text-start text-center text-midnight_text mb-10 tracking-tighter leading-[1.1]">
+              Navigate your university journey <span className="text-primary">without</span> missing{" "}
+              <span className="text-primary">what matters.</span>
             </h1>
-            <div className="flex items-center md:justify-start justify-center gap-8">
+            <div className="flex items-center md:justify-start justify-center gap-5">
               <button
-                className="bg-primary border border-primary rounded-lg text-21 font-medium hover:bg-primary/90 text-white py-3 px-7 z-50 transition-colors duration-200"
+                className="bg-primary border border-primary rounded-xl text-18 font-medium hover:bg-primaryDark text-white py-3.5 px-8 z-50 transition-all duration-300 shadow-primary hover:shadow-primary-lg hover:-translate-y-0.5"
                 onClick={() => setIsBuyingOpen(true)}
               >
                 Join Waitlist
               </button>
-              <button
-                className="bg-white border border-primary rounded-lg text-21 font-medium hover:bg-primary hover:text-white text-primary py-3 px-7 transition-colors duration-200"
-                onClick={() => setIsSellingOpen(true)}
+              <Link
+                href={SURVEY_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-white/80 backdrop-blur-sm border border-border rounded-xl text-18 font-medium hover:bg-primary hover:text-white hover:border-primary text-midnight_text py-3.5 px-8 transition-all duration-300"
               >
                 Take a Survey
-              </button>
+              </Link>
             </div>
-            <div className="flex items-center md:justify-start justify-center gap-12 mt-20">
+            <div className="flex items-center md:justify-start justify-center gap-12 mt-16">
               <Link href="#" className="hover:scale-110 duration-300">
                 <Image
                   src={`${getImagePrefix()}images/hero/applestore.png`}
@@ -136,7 +120,7 @@ const Hero = () => {
               quality={75}
               onLoad={() => setImageLoaded(true)}
             />
-            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-cream to-transparent pointer-events-none"></div>
           </div>
         </motion.div>
         
@@ -147,50 +131,26 @@ const Hero = () => {
           </Suspense>
         </div>
       </div>
-      
-      <div className="absolute w-50 h-50 bg-gradient-to-bl from-tealGreen from-50% to-charcoalGray to-60% blur-400 rounded-full -top-64 -right-14 -z-1"></div>
 
-      {/* Modals for Buy and Sell */}
+      {/* Waitlist modal */}
       {isBuying && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 w-full h-full bg-midnight_text/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div
             ref={BuyRef}
-            className="relative w-full max-w-md overflow-hidden rounded-lg px-8 pt-14 pb-8 z-999 text-center bg-blue-200 bg-opacity-90 backdrop-blur-md"
+            className="relative w-full max-w-md overflow-hidden rounded-2xl px-8 pt-14 pb-8 z-999 text-center bg-white shadow-2xl border border-border/50"
           >
             <button
               onClick={() => setIsBuyingOpen(false)}
-              className="absolute top-0 right-0 mr-8 mt-8 dark:invert"
-              aria-label="Close Buy Modal"
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-grey transition-colors"
+              aria-label="Close Waitlist Modal"
             >
               <Icon
-                icon="tabler:currency-xrp"
-                className="text-white hover:text-primary text-24 inline-block me-2"
+                icon="tabler:x"
+                className="text-muted hover:text-midnight_text text-24"
               />
             </button>
             <Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse"></div>}>
               <BuyCrypto />
-            </Suspense>
-          </div>
-        </div>
-      )}
-      {isSelling && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div
-            ref={SellRef}
-            className="relative w-full max-w-md overflow-hidden rounded-lg px-8 pt-14 pb-8 z-999 text-center bg-blue-200 bg-opacity-90 backdrop-blur-md"
-          >
-            <button
-              onClick={() => setIsSellingOpen(false)}
-              className="absolute top-0 right-0 mr-8 mt-8 dark:invert"
-              aria-label="Close Sell Modal"
-            >
-              <Icon
-                icon="tabler:currency-xrp"
-                className="text-white hover:text-primary text-24 inline-block me-2"
-              />
-            </button>
-            <Suspense fallback={<div className="h-40 bg-gray-100 rounded animate-pulse"></div>}>
-              <SellCrypto />
             </Suspense>
           </div>
         </div>

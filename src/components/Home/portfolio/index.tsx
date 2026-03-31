@@ -9,7 +9,7 @@ const Portfolio = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <section className="md:pt-48 sm:pt-28 pt-12 bg-white" id="portfolio">
+    <section className="md:pt-48 sm:pt-28 pt-12 bg-cream" id="portfolio">
       <div className="container mx-auto lg:max-w-screen-xl px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 items-center gap-20">
           <motion.div
@@ -23,7 +23,7 @@ const Portfolio = () => {
                 <div className="absolute inset-0 bg-gray-200 rounded-2xl animate-pulse w-[400px] h-[500px]"></div>
               )}
               <Image
-                src={`${getImagePrefix()}images/hero/student-events-interface.png?v=${Date.now()}`}
+                src={`${getImagePrefix()}images/hero/student-events-interface.png`}
                 alt="Student Events and Activities Interface"
                 width={400}
                 height={500}
@@ -42,12 +42,11 @@ const Portfolio = () => {
             initial={{ y: "100%", opacity: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="sm:text-28 text-18 text-muted mb-4">
+            <p className="font-display font-medium sm:text-28 text-18 text-muted mb-4">
               Student Success <span className="text-primary">Platform</span>
             </p>
-            <h2 className="text-midnight_text sm:text-40 text-30 mb-4 font-medium">
-              Build your student profile today with Bri
-              <span className="text-primary">dge</span>!
+            <h2 className="font-display font-semibold text-midnight_text sm:text-40 text-30 mb-4 tracking-tight">
+              Build your student profile today with <span className="text-primary">Bridge</span>!
             </h2>
             <p className="text-muted text-18">
               Bridge has a variety of features that make it the best
@@ -69,7 +68,7 @@ const Portfolio = () => {
                       </div>
                     </td>
                     <td className="py-5">
-                      <h4 className="text-midnight_text sm:text-28 text-22 ml-5">
+                      <h4 className="font-display font-semibold text-midnight_text sm:text-28 text-22 ml-5 tracking-tight">
                         {item.title}
                       </h4>
                     </td>

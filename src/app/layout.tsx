@@ -1,6 +1,6 @@
 'use client';
 
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
@@ -13,7 +13,8 @@ import ToasterContext from "@/app/api/contex/ToasetContex";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const font = DM_Sans({ subsets: ["latin"] });
+const fontSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const fontDisplay = Outfit({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 // NoSSR wrapper to prevent hydration mismatches
 function NoSSR({ children }: { children: React.ReactNode }) {
@@ -67,12 +68,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="!scroll-smooth" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>Bridge - Student Success Platform</title>
         <meta name="description" content="Connect, learn, and thrive in your university journey with Bridge - the ultimate student networking and mentorship platform." />
       </head>
-      <body className={`${font.className} bg-white text-midnight_text`}>
+      <body className={`${fontSans.className} ${fontSans.variable} ${fontDisplay.variable} bg-cream text-midnight_text antialiased`}>
         <LayoutContent>{children}</LayoutContent>
       </body>
     </html>

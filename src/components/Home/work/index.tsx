@@ -37,17 +37,17 @@ const Work = () => {
   ];
 
   return (
-    <section className="md:pt-28 bg-white" id="work">
+    <section className="md:pt-28 bg-cream" id="work">
       <div className="container mx-auto lg:max-w-screen-xl px-4">
         <div ref={ref} className="grid grid-cols-12 items-center">
           <motion.div
             {...bottomAnimation}
             className="lg:col-span-7 col-span-12"
           >
-            <p className="sm:text-28 text-18 text-midnight_text">
+            <p className="font-display font-medium sm:text-28 text-18 text-midnight_text">
               Connect with <span className="text-primary">Bridge</span>
             </p>
-            <h2 className="sm:text-40 text-30 text-midnight_text lg:w-full md:w-70% font-medium">
+            <h2 className="font-display font-semibold sm:text-40 text-30 text-midnight_text lg:w-full md:w-70% tracking-tight">
               Successfully navigate your university journey.
             </h2>
             <div className="grid md:grid-cols-2 gap-7 mt-11">
@@ -68,7 +68,7 @@ const Work = () => {
                   <div className="absolute inset-0 bg-gray-200 rounded-2xl animate-pulse w-[400px] h-[600px]"></div>
                 )}
                 <Image
-                  src={`${getImagePrefix()}images/hero/meet-bri-ai.png?v=${Date.now()}`}
+                  src={`${getImagePrefix()}images/hero/meet-bri-ai.png`}
                   alt="Meet Bri - AI Assistant"
                   width={400}
                   height={600}

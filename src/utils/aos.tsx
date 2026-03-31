@@ -10,8 +10,10 @@ const Aoscompo = ({children}:any) => {
         setIsClient(true);
         if (typeof window !== 'undefined') {
             AOS.init({
-                duration: 800,
-                once: false,
+                duration: 450,
+                once: true,
+                offset: 48,
+                easing: "ease-out-quad",
             });
         }
     }, []);

@@ -32,8 +32,10 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
     >
       <Link
         href={item.href}
-        className={`text-17 flex font-medium hover:text-primary capitalized  ${
-          isClient && currentPath === item.href ? "text-primary " : " text-muted "
+        className={`font-display font-medium text-16 flex items-center gap-0.5 px-4 py-2.5 rounded-xl transition-colors ${
+          isClient && currentPath === item.href
+            ? "text-primary bg-primary/10"
+            : "text-midnight_text hover:text-primary hover:bg-grey/50"
         }`}
       >
         {item.label}
@@ -57,18 +59,18 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
       </Link>
       {submenuOpen && (
         <div
-          className={`absolute py-2 left-0 mt-0.5 w-60 bg-white dark:bg-darklight dark:text-white shadow-lg rounded-lg `}
+          className="absolute py-2 left-0 mt-1 w-56 bg-white border border-border/50 shadow-xl rounded-xl overflow-hidden"
           data-aos="fade-up"
-          data-aos-duration="500"
+          data-aos-duration="200"
         >
           {item.submenu?.map((subItem, index) => (
             <Link
               key={index}
               href={subItem.href}
-              className={`block px-4 py-2   ${
+              className={`block px-4 py-2.5 text-16 transition-colors ${
                 isClient && currentPath === subItem.href
-                  ? "bg-primary text-white"
-                  : "text-black dark:text-white hover:bg-primary"
+                  ? "bg-primary/10 text-primary font-medium"
+                  : "text-midnight_text hover:bg-grey/50 hover:text-primary"
               }`}
             >
               {subItem.label}

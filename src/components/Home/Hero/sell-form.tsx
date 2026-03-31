@@ -72,24 +72,26 @@ const SellCrypto = () => {
 
   return (
     <div className="max-w-md mx-auto p-4">
-      <div className="flex justify-center mb-16">
+      <div className="flex justify-center mb-12">
         <Logo />
       </div>
+      <h2 className="font-display font-semibold text-24 text-midnight_text text-center mb-2">Quick Survey</h2>
+      <p className="text-muted text-14 text-center mb-8">Help us shape Bridge by sharing your feedback.</p>
       <form onSubmit={handleSubmit}>
         <div className="mb-4 relative">
           <div
             onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className="cursor-pointer text-white bg-transparent border border-dark_border border-opacity-60 rounded-md px-3 py-2 text-start"
+            className="cursor-pointer text-midnight_text bg-white border border-border rounded-xl px-4 py-3 text-start hover:border-primary/50 transition-colors"
           >
             {formData.name}
           </div>
           {isDropdownOpen && (
-            <div className="absolute z-10 bg-dark border border-dark_border border-opacity-60 mt-1 rounded-md w-full">
+            <div className="absolute z-10 bg-white border border-border mt-2 rounded-xl w-full shadow-lg overflow-hidden">
               {cryptos.map((crypto) => (
                 <div
                   key={crypto.name}
                   onClick={() => handleDropdownSelect(crypto)}
-                  className="px-3 bg-dark_grey text-white hover:text-darkmode py-2 hover:bg-primary cursor-pointer"
+                  className="px-4 py-3 text-midnight_text hover:bg-primary/10 hover:text-primary cursor-pointer transition-colors"
                 >
                   {crypto.name}
                 </div>
@@ -102,7 +104,7 @@ const SellCrypto = () => {
             id="crypto-price"
             type="text"
             name="price"
-            className="text-white bg-transparent border border-dark_border border-opacity-60 rounded-md px-3 py-2 w-full focus:border-primary focus-visible:outline-0"
+            className="text-midnight_text bg-grey/50 border border-border rounded-xl px-4 py-3 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 focus-visible:outline-0 transition-all"
             value={`$${formData.price.toLocaleString()}`}
             disabled
             required
@@ -118,15 +120,15 @@ const SellCrypto = () => {
             onChange={handleChange}
             min="0"
             required
-            className="text-white bg-transparent border border-dark_border border-opacity-60 rounded-md px-3 py-2 w-full focus:border-primary focus-visible:outline-0"
+            className="text-midnight_text placeholder:text-muted bg-grey/50 border border-border rounded-xl px-4 py-3 w-full focus:border-primary focus:ring-2 focus:ring-primary/20 focus-visible:outline-0 transition-all"
           />
         </div>
-        <div className="flex justify-between mb-4 text-white">
-          <p>Total Price: </p>
+        <div className="flex justify-between mb-6 text-midnight_text font-medium">
+          <p>Total Price:</p>
           <p>${totalCost}</p>
         </div>
-        <button className="hover:text-darkmode font-medium text-18 bg-transparent w-full border border-primary rounded-lg py-3 text-primary hover:bg-primary">
-          Sell
+        <button className="font-medium text-18 bg-white w-full border-2 border-primary rounded-xl py-3.5 text-primary hover:bg-primary hover:text-white transition-all duration-300">
+          Submit Survey
         </button>
       </form>
     </div>

@@ -81,22 +81,22 @@ const CardSlider = () => {
       <Slider {...settings}>
         {bridgeSliderData.map((item, index) => (
           <div key={index} className="pr-6">
-            <div className="px-5 py-6 bg-blue-200 bg-opacity-90 rounded-xl h-80 w-full flex flex-col justify-between">
+            <div className="group px-6 py-8 bg-white border border-border/60 rounded-2xl h-80 w-full flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
               <div className="text-center mb-4">
-                <h3 className="text-midnight_text text-18 font-bold mb-2">{item.title}</h3>
+                <h3 className="font-display font-semibold text-midnight_text text-21 mb-1 tracking-tight">{item.title}</h3>
                 <p className="text-primary text-14 font-medium">{item.subtitle}</p>
               </div>
               
               <div className="flex-1 flex items-center justify-center mb-4 relative">
                 {!loadedImages.has(item.id) && (
-                  <div className="absolute inset-0 bg-gray-200 rounded-lg animate-pulse"></div>
+                  <div className="absolute inset-0 bg-grey rounded-xl animate-pulse"></div>
                 )}
                 <Image
                   src={`${getImagePrefix()}images/hero/${item.image}`}
                   alt={item.title}
                   width={200}
                   height={150}
-                  className={`object-contain transition-opacity duration-300 ${
+                  className={`object-contain transition-all duration-300 group-hover:scale-105 ${
                     loadedImages.has(item.id) ? 'opacity-100' : 'opacity-0'
                   }`}
                   loading="lazy"
@@ -106,7 +106,7 @@ const CardSlider = () => {
               </div>
               
               <div className="text-center">
-                <p className="text-midnight_text text-14 leading-relaxed">
+                <p className="text-muted text-14 leading-relaxed">
                   {item.description}
                 </p>
               </div>

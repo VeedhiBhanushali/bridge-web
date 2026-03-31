@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* `scroll-behavior: smooth` on the root makes long pages feel laggy with wheel/trackpad */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 @layer components {

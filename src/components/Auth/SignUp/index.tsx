@@ -45,9 +45,9 @@ const SignUp = () => {
 
       <SocialSignUp />
 
-      <span className="z-1 relative my-8 block text-center before:content-[''] before:absolute before:h-px before:w-40% before:bg-dark_border before:bg-opacity-60 before:left-0 before:top-3 after:content-[''] after:absolute after:h-px after:w-40% after:bg-dark_border after:bg-opacity-60 after:top-3 after:right-0">
-        <span className="text-body-secondary relative z-10 inline-block px-3 text-base text-white">
-          OR
+      <span className="relative z-[1] my-8 block text-center before:absolute before:left-0 before:top-1/2 before:h-px before:w-[42%] before:-translate-y-1/2 before:bg-border after:absolute after:right-0 after:top-1/2 after:h-px after:w-[42%] after:-translate-y-1/2 after:bg-border">
+        <span className="relative z-10 inline-block bg-white px-3 text-16 font-medium text-muted">
+          or continue with email
         </span>
       </span>
 
@@ -58,7 +58,7 @@ const SignUp = () => {
             placeholder="Name"
             name="name"
             required
-            className="w-full rounded-md border border-dark_border border-opacity-60 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary"
+            className="w-full rounded-xl border border-border bg-grey/40 px-5 py-3.5 text-16 text-midnight_text outline-none transition placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
         <div className="mb-[22px]">
@@ -67,7 +67,7 @@ const SignUp = () => {
             placeholder="Email"
             name="email"
             required
-            className="w-full rounded-md border border-dark_border border-opacity-60 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary"
+            className="w-full rounded-xl border border-border bg-grey/40 px-5 py-3.5 text-16 text-midnight_text outline-none transition placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
         <div className="mb-[22px]">
@@ -76,34 +76,35 @@ const SignUp = () => {
             placeholder="Password"
             name="password"
             required
-            className="w-full rounded-md border border-dark_border border-opacity-60 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary"
+            className="w-full rounded-xl border border-border bg-grey/40 px-5 py-3.5 text-16 text-midnight_text outline-none transition placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
         </div>
         <div className="mb-9">
           <button
             type="submit"
-            className="flex w-full items-center text-18 font-medium justify-center rounded-md bg-primary px-5 py-3 text-darkmode transition duration-300 ease-in-out hover:bg-transparent hover:text-primary border-primary border "
+            className="flex w-full items-center justify-center rounded-xl border border-primary bg-primary px-5 py-3.5 text-18 font-medium text-white transition-colors hover:bg-primaryDark"
           >
             Sign Up {loading && <Loader />}
           </button>
         </div>
       </form>
 
-      <p className="text-body-secondary mb-4 text-white text-base">
-        By creating an account you are agree with our{" "}
-        <a href="/#" className="text-primary hover:underline">
+      <p className="mb-4 text-16 leading-relaxed text-muted">
+        By creating an account you agree with our{" "}
+        <a href="/#" className="font-medium text-primary hover:underline">
           Privacy
         </a>{" "}
         and{" "}
-        <a href="/#" className="text-primary hover:underline">
+        <a href="/#" className="font-medium text-primary hover:underline">
           Policy
         </a>
+        .
       </p>
 
-      <p className="text-body-secondary text-white text-base">
-        Already have an account?
-        <Link href="/" className="pl-2 text-primary hover:underline">
-          Sign In
+      <p className="text-16 text-muted">
+        Already have an account?{" "}
+        <Link href="/" className="font-medium text-primary hover:underline">
+          Sign in
         </Link>
       </p>
     </>

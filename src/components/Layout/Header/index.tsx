@@ -32,12 +32,6 @@ const Header: React.FC = () => {
     setIsClient(true);
   }, []);
 
-  const handleScroll = () => {
-    if (typeof window !== 'undefined') {
-      setSticky(window.scrollY >= 80);
-    }
-  };
-
   const handleClickOutside = (event: MouseEvent) => {
     if (
       signInRef.current &&
@@ -61,14 +55,28 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener("scroll", handleScroll);
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }
+    if (typeof window === "undefined") return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setSticky((prev) => {
+          const next = window.scrollY >= 80;
+          return prev === next ? prev : next;
+        });
+        ticking = false;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [navbarOpen, isSignInOpen, isSignUpOpen]);
 
   useEffect(() => {
@@ -84,33 +92,12 @@ const Header: React.FC = () => {
   // Don't render until client-side hydration is complete
   if (!isClient) {
     return (
-      <header className="fixed top-0 z-40 w-full pb-5 shadow-none md:pt-14 pt-5">
-        <div className="lg:py-0 py-2">
-          <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md flex items-center px-4">
-            <div className="flex-shrink-0 mr-8">
-              <Logo />
-            </div>
-            <nav className="hidden lg:flex flex-grow items-center gap-8 justify-center">
-              {headerData.map((item, index) => (
-                <Link key={index} href={item.href} className="text-17 flex font-medium hover:text-primary capitalized text-muted">
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="flex items-center gap-4 ml-auto">
-              <Link
-                href="#"
-                className="hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary hover:text-darkmode px-4 py-2 rounded-lg"
-              >
-                Sign In
-              </Link>
-              <Link
-                href="#"
-                className="hidden lg:block bg-primary text-darkmode hover:bg-transparent hover:text-primary border border-primary px-4 py-2 rounded-lg"
-              >
-                Sign Up
-              </Link>
-            </div>
+      <header className="fixed top-0 z-40 w-full transition-all duration-300 py-4 md:py-0">
+        <div className="container mx-auto lg:max-w-screen-xl px-4">
+          <div className="flex items-center justify-between h-14 lg:h-16">
+            <Logo />
+            <nav className="hidden lg:flex items-center gap-1" />
+            <div className="hidden lg:flex items-center gap-3" />
           </div>
         </div>
       </header>
@@ -119,74 +106,70 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full pb-5 transition-all duration-300 ${
-        sticky ? " shadow-lg bg-darkmode pt-5" : "shadow-none md:pt-14 pt-5"
+      className={`fixed top-0 z-40 w-full transition-all duration-300 py-4 md:py-0 ${
+        sticky
+          ? "bg-primaryLight/20 backdrop-blur-md shadow-sm border-b border-primary/15"
+          : "bg-primaryLight/15"
       }`}
     >
-      <div className="lg:py-0 py-2">
-        <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md flex items-center px-4">
-          <div className="flex-shrink-0 mr-8">
-            <Logo />
-          </div>
-          <nav className="hidden lg:flex flex-grow items-center gap-8 justify-center">
+      <div className="container mx-auto lg:max-w-screen-xl px-4">
+        <div className="flex items-center justify-between h-14 lg:h-16">
+          <Logo />
+          <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
             {headerData.map((item, index) => (
               <HeaderLink key={index} item={item} />
             ))}
           </nav>
-          <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-3">
             <Link
               href="#"
-              className="hidden lg:block bg-transparent text-primary border hover:bg-primary border-primary hover:text-darkmode px-4 py-2 rounded-lg"
-              onClick={() => {
+              className="hidden lg:flex items-center font-medium text-16 text-midnight_text hover:text-primary px-4 py-2.5 rounded-xl transition-colors duration-200"
+              onClick={(e) => {
+                e.preventDefault();
                 setIsSignInOpen(true);
               }}
             >
               Sign In
             </Link>
-            {isSignInOpen && (
-              <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div
-                  ref={signInRef}
-                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-lg px-8 pt-14 pb-8 text-center bg-dark_grey bg-opacity-90 backdrop-blur-md"
-                >
-                  <button
-                    onClick={() => setIsSignInOpen(false)}
-                    className="absolute top-0 right-0 mr-8 mt-8 dark:invert"
-                    aria-label="Close Sign In Modal"
-                  >
-                    <Icon
-                      icon="tabler:currency-xrp"
-                      className="text-white hover:text-primary text-24 inline-block me-2"
-                    />
-                  </button>
-                  <Signin />
-                </div>
-              </div>
-            )}
             <Link
               href="#"
-              className="hidden lg:block bg-primary text-darkmode hover:bg-transparent hover:text-primary border border-primary px-4 py-2 rounded-lg"
-              onClick={() => {
+              className="hidden lg:flex items-center font-medium text-16 bg-primary text-white px-5 py-2.5 rounded-xl border border-primary hover:bg-primaryDark hover:border-primaryDark transition-all duration-200"
+              onClick={(e) => {
+                e.preventDefault();
                 setIsSignUpOpen(true);
               }}
             >
               Sign Up
             </Link>
+            {isSignInOpen && (
+              <div className="fixed inset-0 bg-midnight_text/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div
+                  ref={signInRef}
+                  className="relative w-full max-w-md overflow-hidden rounded-2xl px-8 pt-14 pb-8 text-center bg-white shadow-2xl border border-border/50"
+                >
+                  <button
+                    onClick={() => setIsSignInOpen(false)}
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-grey transition-colors"
+                    aria-label="Close Sign In"
+                  >
+                    <Icon icon="tabler:x" className="text-muted hover:text-midnight_text text-24" />
+                  </button>
+                  <Signin />
+                </div>
+              </div>
+            )}
             {isSignUpOpen && (
-              <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-midnight_text/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                 <div
                   ref={signUpRef}
-                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-lg bg-dark_grey bg-opacity-90 backdrop-blur-md px-8 pt-14 pb-8 text-center"
+                  className="relative w-full max-w-md overflow-hidden rounded-2xl px-8 pt-14 pb-8 text-center bg-white shadow-2xl border border-border/50"
                 >
                   <button
                     onClick={() => setIsSignUpOpen(false)}
-                    className="absolute top-0 right-0 mr-8 mt-8 dark:invert"
-                    aria-label="Close Sign Up Modal"
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-grey transition-colors"
+                    aria-label="Close Sign Up"
                   >
-                    <Icon
-                      icon="tabler:currency-xrp"
-                      className="text-white hover:text-primary text-24 inline-block me-2"
-                    />
+                    <Icon icon="tabler:x" className="text-muted hover:text-midnight_text text-24" />
                   </button>
                   <SignUp />
                 </div>
@@ -194,42 +177,48 @@ const Header: React.FC = () => {
             )}
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
-              className="block lg:hidden p-2 rounded-lg"
+              className="flex lg:hidden p-2.5 rounded-xl hover:bg-grey/50 transition-colors"
               aria-label="Toggle mobile menu"
             >
-              <span className="block w-6 h-0.5 bg-white"></span>
-              <span className="block w-6 h-0.5 bg-white mt-1.5"></span>
-              <span className="block w-6 h-0.5 bg-white mt-1.5"></span>
+              <div className="flex flex-col gap-1.5">
+                <span className="block w-5 h-0.5 bg-midnight_text rounded-full" />
+                <span className="block w-5 h-0.5 bg-midnight_text rounded-full" />
+                <span className="block w-5 h-0.5 bg-midnight_text rounded-full" />
+              </div>
             </button>
           </div>
         </div>
-        {navbarOpen && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40" />
-        )}
-        <div
-          ref={mobileMenuRef}
-          className={`lg:hidden fixed top-0 right-0 h-full w-full bg-darkmode shadow-lg transform transition-transform duration-300 max-w-xs ${
-            navbarOpen ? "translate-x-0" : "translate-x-full"
-          } z-50`}
-        >
-          <div className="flex items-center justify-between p-4">
-            <h2 className="text-lg font-bold text-midnight_text dark:text-midnight_text">
-              <Logo />
-            </h2>
+      </div>
+      {navbarOpen && (
+        <div className="fixed inset-0 bg-midnight_text/40 backdrop-blur-sm z-40 lg:hidden" onClick={() => setNavbarOpen(false)} />
+      )}
+      <div
+        ref={mobileMenuRef}
+        className={`lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-out ${
+          navbarOpen ? "translate-x-0" : "translate-x-full"
+        } z-50 border-l border-border/50`}
+      >
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between p-6 border-b border-border/50">
+            <Logo />
             <button
               onClick={() => setNavbarOpen(false)}
-              className="bg-[url('/images/closed.svg')] bg-no-repeat bg-contain w-5 h-5 absolute top-0 right-0 mr-8 mt-8 dark:invert"
-              aria-label="Close menu Modal"
-            ></button>
+              className="p-2.5 rounded-xl hover:bg-grey/50 transition-colors"
+              aria-label="Close menu"
+            >
+              <Icon icon="tabler:x" className="text-midnight_text text-24" />
+            </button>
           </div>
-          <nav className="flex flex-col items-start p-4">
-            {headerData.map((item, index) => (
-              <MobileHeaderLink key={index} item={item} />
-            ))}
-            <div className="mt-4 flex flex-col space-y-4 w-full">
+          <nav className="flex-1 overflow-y-auto p-6">
+            <div className="flex flex-col gap-1">
+              {headerData.map((item, index) => (
+                <MobileHeaderLink key={index} item={item} onClose={() => setNavbarOpen(false)} />
+              ))}
+            </div>
+            <div className="mt-8 pt-6 border-t border-border/50 flex flex-col gap-3">
               <Link
                 href="#"
-                className="bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white"
+                className="flex items-center justify-center font-medium text-16 text-midnight_text border border-border rounded-xl py-3 px-4 hover:border-primary hover:text-primary transition-colors"
                 onClick={() => {
                   setIsSignInOpen(true);
                   setNavbarOpen(false);
@@ -239,7 +228,7 @@ const Header: React.FC = () => {
               </Link>
               <Link
                 href="#"
-                className="bg-primary text-darkmode px-4 py-2 rounded-lg hover:bg-blue-600"
+                className="flex items-center justify-center font-medium text-16 bg-primary text-white rounded-xl py-3 px-4 hover:bg-primaryDark transition-colors shadow-primary"
                 onClick={() => {
                   setIsSignUpOpen(true);
                   setNavbarOpen(false);
