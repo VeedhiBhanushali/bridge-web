@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { validateEmail } from "../../../utils/validateEmail";
@@ -9,7 +9,7 @@ const MagicLink = () => {
   const [email, setEmail] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email) {
@@ -56,9 +56,10 @@ const MagicLink = () => {
       <div className="mb-9">
         <button
           type="submit"
-          className="flex w-full cursor-pointer items-center justify-center rounded-md border border-primary bg-[#102C46] px-5 py-3 text-base text-white transition duration-300 ease-in-out hover:bg-[#102C46]"
+          disabled={loader}
+          className="flex w-full cursor-pointer items-center justify-center rounded-md border border-primary bg-[#102C46] px-5 py-3 text-base text-white transition duration-300 ease-in-out hover:bg-[#102C46] disabled:opacity-70"
         >
-          Send Magic Link 
+          Send Magic Link {loader && <Loader />}
         </button>
       </div>
     </form>

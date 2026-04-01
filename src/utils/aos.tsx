@@ -1,9 +1,9 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import AOS from "aos"
 import 'aos/dist/aos.css';
 
-const Aoscompo = ({children}:any) => {
+const Aoscompo = ({ children }: { children: ReactNode }) => {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {

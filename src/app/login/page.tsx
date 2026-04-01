@@ -37,18 +37,24 @@ export default function LoginPage() {
       console.log('✅ Auth success:', userCred.user);
       await syncUserToFirestore(userCred.user);
       router.push('/dashboard');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('❌ Auth failed:', err);
-      if (err.code === 'auth/user-not-found') {
-        setErrorMsg('No account found with this email');
-      } else if (err.code === 'auth/wrong-password') {
-        setErrorMsg('Invalid password');
-      } else if (err.code === 'auth/invalid-credential') {
-        setErrorMsg('Invalid credentials - please check your email and password');
-      } else if (err.code === 'auth/email-already-in-use') {
-        setErrorMsg('An account already exists with this email');
+      const code =
+        err && typeof err === "object" && "code" in err
+          ? String((err as { code?: string }).code)
+          : "";
+      const message =
+        err instanceof Error ? err.message : "Something went wrong";
+      if (code === "auth/user-not-found") {
+        setErrorMsg("No account found with this email");
+      } else if (code === "auth/wrong-password") {
+        setErrorMsg("Invalid password");
+      } else if (code === "auth/invalid-credential") {
+        setErrorMsg("Invalid credentials - please check your email and password");
+      } else if (code === "auth/email-already-in-use") {
+        setErrorMsg("An account already exists with this email");
       } else {
-        setErrorMsg(err.message);
+        setErrorMsg(message);
       }
     }
   };
@@ -62,9 +68,9 @@ export default function LoginPage() {
       console.log('✅ Google auth success:', result.user);
       await syncUserToFirestore(result.user);
       router.push('/dashboard');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('❌ Google login failed:', err);
-      setErrorMsg(err.message);
+      setErrorMsg(err instanceof Error ? err.message : "Google sign-in failed");
     }
   };
 

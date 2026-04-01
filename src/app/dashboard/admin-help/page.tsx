@@ -30,7 +30,10 @@ export default function AdminHelpPage() {
               </div>
               <div>
                 <h3 className="font-medium text-gray-900">Deleting Users</h3>
-                <p>Click the "Delete" button next to any user to remove them from the platform. This action is permanent.</p>
+                <p>
+                  Click the &quot;Delete&quot; button next to any user to remove them from the platform. This action is
+                  permanent.
+                </p>
               </div>
             </div>
           </div>
@@ -41,7 +44,9 @@ export default function AdminHelpPage() {
             <div className="space-y-3 text-sm text-gray-600">
               <div>
                 <h3 className="font-medium text-gray-900">Creating Clubs</h3>
-                <p>Use the "Create New Club" button to add new student organizations to the platform.</p>
+                <p>
+                  Use the &quot;Create New Club&quot; button to add new student organizations to the platform.
+                </p>
               </div>
               <div>
                 <h3 className="font-medium text-gray-900">Club Information</h3>

@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import toast from "react-hot-toast";
 import SocialSignIn from "../SocialSignIn";
 import Logo from "@/components/Layout/Header/Logo"
@@ -18,7 +18,7 @@ const Signin = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const loginUser = (e: any) => {
+  const loginUser = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     setLoading(true);

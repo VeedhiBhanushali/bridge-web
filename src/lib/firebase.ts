@@ -1,7 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  getDoc,
+  setDoc,
+  type DocumentData,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Club } from '../types/club';
 import { Nudge } from '../types/nudge';
@@ -400,16 +411,18 @@ export async function checkUserRSVP(eventId: string, userId: string): Promise<bo
   return snapshot.exists();
 }
 
+type FirestoreTimestampLike = { seconds: number; nanoseconds?: number };
+
 // Utility function to convert Firestore Timestamp objects to strings
-export const convertFirestoreTimestamp = (timestamp: any): string => {
+export const convertFirestoreTimestamp = (timestamp: unknown): string => {
   if (!timestamp) {
     return new Date().toISOString();
   }
   
   // Check if it's a Firestore Timestamp object
   if (timestamp && typeof timestamp === 'object' && 'seconds' in timestamp) {
-    // It's a Firestore Timestamp
-    return new Date((timestamp as any).seconds * 1000).toISOString();
+    const ts = timestamp as FirestoreTimestampLike;
+    return new Date(ts.seconds * 1000).toISOString();
   }
   
   // Check if it's already a Date object
@@ -432,7 +445,9 @@ export const convertFirestoreTimestamp = (timestamp: any): string => {
 };
 
 // Utility function to recursively convert all timestamp objects in a document
-export const convertDocumentTimestamps = (doc: any): any => {
+export function convertDocumentTimestamps(data: DocumentData): Record<string, unknown>;
+export function convertDocumentTimestamps(doc: unknown): unknown;
+export function convertDocumentTimestamps(doc: unknown): unknown {
   if (!doc || typeof doc !== 'object') {
     return doc;
   }
@@ -441,9 +456,9 @@ export const convertDocumentTimestamps = (doc: any): any => {
     return doc.map(convertDocumentTimestamps);
   }
   
-  const converted: any = {};
+  const converted: Record<string, unknown> = {};
   
-  for (const [key, value] of Object.entries(doc)) {
+  for (const [key, value] of Object.entries(doc as Record<string, unknown>)) {
     // Check if this field might be a timestamp
     if (key.includes('At') || key.includes('Date') || key.includes('Time')) {
       converted[key] = convertFirestoreTimestamp(value);
@@ -459,6 +474,6 @@ export const convertDocumentTimestamps = (doc: any): any => {
   }
   
   return converted;
-};
+}
 
 export default app;

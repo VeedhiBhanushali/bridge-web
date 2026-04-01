@@ -3,7 +3,7 @@
 import { DashboardLayout } from '@/components/DashboardLayout';
 import { useEffect, useState } from 'react';
 import { db, convertDocumentTimestamps } from '@/lib/firebase';
-import { collection, getDocs, deleteDoc, doc, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, addDoc } from 'firebase/firestore';
 import { Event } from '@/types';
 import toast from 'react-hot-toast';
 

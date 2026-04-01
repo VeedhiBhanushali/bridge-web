@@ -29,12 +29,14 @@ function NoSSR({ children }: { children: React.ReactNode }) {
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isClient, setIsClient] = useState(false);
   const [isDashboardPage, setIsDashboardPage] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
-    setIsDashboardPage(pathname?.startsWith('/dashboard') || pathname === '/profile' || pathname === '/login');
+    setIsDashboardPage(
+      pathname?.startsWith("/dashboard") ||
+        pathname === "/profile" ||
+        pathname === "/login"
+    );
   }, [pathname]);
 
   return (

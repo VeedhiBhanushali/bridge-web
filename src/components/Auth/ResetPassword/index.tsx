@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Loader from "@/components/Common/Loader";
@@ -33,8 +33,12 @@ const ResetPassword = ({ token }: { token: string }) => {
             email: res.data.email,
           });
         }
-      } catch (error: any) {
-        toast.error(error?.response?.data);
+      } catch (error: unknown) {
+        if (isAxiosError(error) && error.response?.data !== undefined) {
+          toast.error(String(error.response.data));
+        } else {
+          toast.error("Verification failed.");
+        }
         router.push("/forgot-password");
       }
     };
@@ -72,8 +76,12 @@ const ResetPassword = ({ token }: { token: string }) => {
       }
 
       setLoader(false);
-    } catch (error: any) {
-      toast.error(error.response.data);
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.data !== undefined) {
+        toast.error(String(error.response.data));
+      } else {
+        toast.error("Update failed.");
+      }
       setLoader(false);
     }
   };

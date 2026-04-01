@@ -127,8 +127,12 @@ const SellCrypto = () => {
           <p>Total Price:</p>
           <p>${totalCost}</p>
         </div>
-        <button className="font-medium text-18 bg-white w-full border-2 border-primary rounded-xl py-3.5 text-primary hover:bg-primary hover:text-white transition-all duration-300">
-          Submit Survey
+        <button
+          type="submit"
+          disabled={loading}
+          className="font-medium text-18 bg-white w-full border-2 border-primary rounded-xl py-3.5 text-primary hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {loading ? "Submitting…" : "Submit Survey"}
         </button>
       </form>
     </div>

@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import Loader from "@/components/Common/Loader";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email) {
@@ -40,8 +40,12 @@ const ForgotPassword = () => {
 
       setEmail("");
       setLoader(false);
-    } catch (error: any) {
-      toast.error(error?.response.data);
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.data !== undefined) {
+        toast.error(String(error.response.data));
+      } else {
+        toast.error("Something went wrong.");
+      }
       setLoader(false);
     }
   };

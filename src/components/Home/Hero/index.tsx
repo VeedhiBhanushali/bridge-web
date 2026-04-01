@@ -14,7 +14,6 @@ const SURVEY_FORM_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
 
 const Hero = () => {
   const [isBuying, setIsBuyingOpen] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const BuyRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
@@ -118,7 +117,6 @@ const Hero = () => {
               className="object-cover"
               loading="lazy"
               quality={75}
-              onLoad={() => setImageLoaded(true)}
             />
             <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-cream to-transparent pointer-events-none"></div>
           </div>

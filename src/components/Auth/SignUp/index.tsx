@@ -4,18 +4,18 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import SocialSignUp from "../SocialSignUp";
 import Logo from "@/components/Layout/Header/Logo";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Loader from "@/components/Common/Loader";
 const SignUp = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setLoading(true);
-    const data = new FormData(e.currentTarget);
-    const value = Object.fromEntries(data.entries());
+    const form = new FormData(e.currentTarget);
+    const value = Object.fromEntries(form.entries());
     const finalData = { ...value };
 
     fetch("/api/register", {
@@ -26,13 +26,13 @@ const SignUp = () => {
       body: JSON.stringify(finalData),
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         toast.success("Successfully registered");
         setLoading(false);
         router.push("/signin");
       })
-      .catch((err) => {
-        toast.error(err.message);
+      .catch((err: unknown) => {
+        toast.error(err instanceof Error ? err.message : "Registration failed");
         setLoading(false);
       });
   };
@@ -91,13 +91,13 @@ const SignUp = () => {
 
       <p className="mb-4 text-16 leading-relaxed text-muted">
         By creating an account you agree with our{" "}
-        <a href="/#" className="font-medium text-primary hover:underline">
+        <Link href="/#" className="font-medium text-primary hover:underline">
           Privacy
-        </a>{" "}
+        </Link>{" "}
         and{" "}
-        <a href="/#" className="font-medium text-primary hover:underline">
+        <Link href="/#" className="font-medium text-primary hover:underline">
           Policy
-        </a>
+        </Link>
         .
       </p>
 

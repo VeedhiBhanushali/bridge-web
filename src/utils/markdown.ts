@@ -14,12 +14,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  type Items = {
-    // [key: string]: string;
-    [key: string]: string | object;
-  };
-
-  const items: any = {};
+  const items: Record<string, unknown> = {};
 
   function processImages(content: string) {
     // You can modify this function to handle image processing
@@ -55,7 +50,13 @@ export function getAllPosts(fields: string[] = []) {
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .sort((post1, post2) => {
+      const a = post1.date;
+      const b = post2.date;
+      const sa = typeof a === "string" ? a : "";
+      const sb = typeof b === "string" ? b : "";
+      return sa > sb ? -1 : 1;
+    });
 
   return posts;
 }
