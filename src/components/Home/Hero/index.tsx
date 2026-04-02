@@ -59,16 +59,26 @@ const Hero = () => {
       className="relative md:pt-28 md:pb-24 py-14 overflow-hidden z-1 bg-cream"
       id="main-banner"
     >
-      <div className="container mx-auto lg:max-w-screen-xl px-4 relative">
+      <div className="container mx-auto lg:max-w-[1400px] px-4 lg:pr-0 relative">
         <div className="grid grid-cols-12">
-          <motion.div {...leftAnimation} className="lg:col-span-5 col-span-12">
+          <motion.div {...leftAnimation} className="lg:col-span-6 col-span-12">
             <div className="flex gap-6 items-center lg:justify-start justify-center mt-7">
              
             </div>
-            <h1 className="font-display font-semibold lg:text-70 md:text-65 text-54 lg:text-start text-center text-midnight_text mb-10 tracking-tighter leading-[1.1]">
-              Navigate your university journey <span className="text-primary">without</span> missing{" "}
-              <span className="text-primary">what matters.</span>
+            <h1 className="font-display font-semibold lg:text-70 md:text-65 text-54 lg:text-start text-center text-midnight_text mb-6 tracking-tighter leading-[1.1]">
+              International students navigate high-stakes decisions with no system.
             </h1>
+            <p className="text-muted text-20 lg:text-start text-center mb-10 max-w-2xl">
+              Bridge tells you what matters, when it matters, so you never miss the decisions that shape your future.
+            </p>
+            <div className="mb-10 rounded-2xl border border-primary/20 bg-primaryLight/20 px-6 py-5 backdrop-blur-sm">
+              <p className="font-display font-semibold text-midnight_text text-22 lg:text-start text-center mb-3">
+                One missed step can change your entire trajectory.
+              </p>
+              <p className="text-muted text-16 lg:text-start text-center">
+                Built from real international student journeys, starting at SJSU.
+              </p>
+            </div>
             <div className="flex items-center md:justify-start justify-center gap-5">
               <button
                 className="bg-primary border border-primary rounded-xl text-18 font-medium hover:bg-primaryDark text-white py-3.5 px-8 z-50 transition-all duration-300 shadow-primary hover:shadow-primary-lg hover:-translate-y-0.5"
@@ -82,22 +92,11 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center bg-white/80 backdrop-blur-sm border border-border rounded-xl text-18 font-medium hover:bg-primary hover:text-white hover:border-primary text-midnight_text py-3.5 px-8 transition-all duration-300"
               >
-                Take a Survey
-              </Link>
-            </div>
-            <div className="flex items-center md:justify-start justify-center gap-12 mt-16">
-              <Link href="#" className="hover:scale-110 duration-300">
-                <Image
-                  src={`${getImagePrefix()}images/hero/applestore.png`}
-                  alt="App Store"
-                  width={240}
-                  height={70}
-                  loading="lazy"
-                />
+                Help shape Bridge
               </Link>
             </div>
           </motion.div>
-          <div className="col-span-7 lg:block hidden">
+          <div className="col-span-6 lg:block hidden">
             {/* Empty space for layout */}
           </div>
         </div>
@@ -106,7 +105,7 @@ const Hero = () => {
         <motion.div
           {...rightAnimation}
           className="absolute top-0 right-0 lg:block hidden"
-          style={{ right: '-4rem' }}
+          style={{ right: '-6rem' }}
         >
           <div className="relative">
             <Image

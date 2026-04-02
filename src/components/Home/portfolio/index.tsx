@@ -43,14 +43,16 @@ const Portfolio = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="font-display font-medium sm:text-28 text-18 text-muted mb-4">
-              Student Success <span className="text-primary">Platform</span>
+              See what to do <span className="text-primary">this week</span>
             </p>
             <h2 className="font-display font-semibold text-midnight_text sm:text-40 text-30 mb-4 tracking-tight">
-              Build your student profile today with <span className="text-primary">Bridge</span>!
+              Not more information. Better timing.
             </h2>
+            <p className="text-muted text-18 mb-2">
+              Get alerts before it&apos;s too late.
+            </p>
             <p className="text-muted text-18">
-              Bridge has a variety of features that make it the best
-              <br className="md:block hidden" /> place to start your university journey.
+              Track your readiness across your journey.
             </p>
 
             <table className="w-full sm:w-[80%]">

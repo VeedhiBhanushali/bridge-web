@@ -13,7 +13,7 @@ const Footer: FC = () => {
           <div className="lg:col-span-5">
             <Logo />
             <p className="text-muted text-16 mt-4 max-w-sm">
-              Navigate your university journey without missing what matters.
+              Bridge tells you what matters, when it matters, so you never miss the decisions that shape your future.
             </p>
             <div className="flex gap-4 items-center mt-6">
               <Link

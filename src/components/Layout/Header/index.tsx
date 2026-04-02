@@ -88,7 +88,7 @@ const Header: React.FC = () => {
   // Don't render until client-side hydration is complete
   if (!isClient) {
     return (
-      <header className="fixed top-0 z-40 w-full transition-all duration-300 py-4 md:py-0">
+      <header className="fixed top-0 z-40 w-full transition-all duration-300 py-5 md:py-1">
         <div className="container mx-auto lg:max-w-screen-xl px-4">
           <div className="flex items-center justify-between h-14 lg:h-16">
             <Logo />
@@ -102,7 +102,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 z-40 w-full transition-all duration-300 py-4 md:py-0 ${
+      className={`fixed top-0 z-40 w-full transition-all duration-300 py-5 md:py-1 ${
         sticky
           ? "bg-primaryLight/20 backdrop-blur-md shadow-sm border-b border-primary/15"
           : "bg-primaryLight/15"

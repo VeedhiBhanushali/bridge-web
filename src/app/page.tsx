@@ -26,7 +26,7 @@ const Perks = dynamic(() => import("@/components/Home/perks"), {
 
 export const metadata: Metadata = {
   title: "Bridge - Student Success Platform",
-  description: "Navigate your university journey without missing what matters.",
+  description: "International students navigate high-stakes decisions with no system.",
 };
 
 export default function Home() {

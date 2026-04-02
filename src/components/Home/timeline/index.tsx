@@ -18,10 +18,10 @@ const TimeLine = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="font-display font-medium text-muted sm:text-28 text-18 mb-9">
-              Student Journey <span className="text-primary">Timeline</span>
+              Bridge shows you <span className="text-primary">what matters before it&apos;s too late</span>
             </p>
             <h2 className="font-display font-semibold text-midnight_text sm:text-40 text-30 tracking-tight lg:w-80% mx-auto mb-20">
-              We guide you through every step of your university journey, from arrival to graduation.
+              Instead of overwhelming you with everything, Bridge focuses on the next critical step based on your journey.
             </h2>
           </motion.div>
           <motion.div

@@ -9,31 +9,26 @@ const bridgeSliderData = [
   {
     id: 1,
     image: "student-networking.png",
-    title: "Campus Networking",
-    subtitle: "Connect with peers",
-    description: "Build meaningful relationships with fellow students across your campus community."
+    title: "No timing layer",
+    subtitle: "",
+    description:
+      "Critical actions are time-sensitive, but no system surfaces urgency at the right moment.",
   },
   {
     id: 2,
     image: "student-portal.png",
-    title: "Student Portal",
-    subtitle: "Access everything",
-    description: "Your centralized hub for academic resources, schedules, and university services."
+    title: "No system memory",
+    subtitle: "",
+    description:
+      "Each student repeats the same mistakes because knowledge is not structured or retained.",
   },
   {
     id: 3,
     image: "student-checklist.png",
-    title: "Progress Tracking",
-    subtitle: "Stay organized",
-    description: "Keep track of your academic milestones and important tasks with our mobile app."
+    title: "Reactive support",
+    subtitle: "",
+    description: "Help comes after problems happen, not before.",
   },
-  {
-    id: 4,
-    image: "student-collaboration.png",
-    title: "Team Collaboration",
-    subtitle: "Work together",
-    description: "Collaborate effectively on projects and assignments with built-in tools."
-  }
 ];
 
 const CardSlider = () => {
@@ -50,7 +45,7 @@ const CardSlider = () => {
     infinite: true,
     autoplaySpeed: 2000,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     cssEase: "ease-in-out",
     lazyLoad: "ondemand" as const,
@@ -70,7 +65,7 @@ const CardSlider = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
         },
       },
     ],
@@ -78,13 +73,18 @@ const CardSlider = () => {
 
   return (
     <div className="lg:-mt-16 mt-16">
+      <div className="text-center mb-8">
+        <h2 className="font-display font-semibold text-midnight_text text-32 sm:text-40 tracking-tight">
+          Why students fall behind
+        </h2>
+      </div>
       <Slider {...settings}>
         {bridgeSliderData.map((item, index) => (
           <div key={index} className="pr-6">
             <div className="group px-6 py-8 bg-white border border-border/60 rounded-2xl h-80 w-full flex flex-col justify-between shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300">
               <div className="text-center mb-4">
                 <h3 className="font-display font-semibold text-midnight_text text-21 mb-1 tracking-tight">{item.title}</h3>
-                <p className="text-primary text-14 font-medium">{item.subtitle}</p>
+                {item.subtitle && <p className="text-primary text-14 font-medium">{item.subtitle}</p>}
               </div>
               
               <div className="flex-1 flex items-center justify-center mb-4 relative">

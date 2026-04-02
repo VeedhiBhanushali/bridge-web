@@ -87,15 +87,15 @@ export const pricedeta: {
 export const portfolioData: { image: string; title: string }[] = [
   {
     image: "/images/portfolio/icon-profile.svg",
-    title: "Build your student profile",
+    title: "Know what matters this week",
   },
   {
     image: "/images/portfolio/icon-network.svg",
-    title: "Expand your network",
+    title: "Avoid irreversible mistakes",
   },
   {
     image: "/images/portfolio/icon-guidance.svg",
-    title: "Get personalized guidance",
+    title: "Act before it's too late",
   },
 ];
 
@@ -114,20 +114,20 @@ export const perksData: {
 }[] = [
   {
     icon: "/images/perks/icon-support.svg",
-    title: "24/7 Support",
-    text: "Need help? Get your requests solved quickly via our support team.",
+    title: "WhatsApp groups",
+    text: "Students rely on chat threads to figure out deadlines and decisions.",
     space: "lg:mt-8",
   },
   {
     icon: "/images/perks/icon-community.svg",
-    title: "Community",
-    text: "Join the conversations in our worldwide Bridge student communities",
+    title: "Reddit threads",
+    text: "Students crowdsource answers in scattered forums with mixed reliability.",
     space: "lg:mt-14",
   },
   {
     icon: "/images/perks/icon-academy.svg",
-    title: "Mentorship",
-    text: "Get guidance from experienced<br /> mentors for free.",
+    title: "Senior advice",
+    text: "Shared documents",
     space: "lg:mt-4",
   },
 ];

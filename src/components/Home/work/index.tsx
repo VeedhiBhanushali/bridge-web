@@ -23,16 +23,20 @@ const Work = () => {
 
   const services = [
     {
-      icon: "🤝",
-      text: "Academic Mentorship",
+      icon: "⏳",
+      text: "Missed internship cycles that don't reopen",
     },
     {
-      icon: "👥",
-      text: "Student Community",
+      icon: "📉",
+      text: "Lost CPT eligibility that can't be recovered",
     },
     {
-      icon: "💼",
-      text: "Career Guidance",
+      icon: "🎓",
+      text: "Delayed graduation from decisions made months earlier",
+    },
+    {
+      icon: "🏠",
+      text: "Opportunities that disappear without warning",
     },
   ];
 
@@ -44,11 +48,9 @@ const Work = () => {
             {...bottomAnimation}
             className="lg:col-span-7 col-span-12"
           >
-            <p className="font-display font-medium sm:text-28 text-18 text-midnight_text">
-              Connect with <span className="text-primary">Bridge</span>
-            </p>
+            
             <h2 className="font-display font-semibold sm:text-40 text-30 text-midnight_text lg:w-full md:w-70% tracking-tight">
-              Successfully navigate your university journey.
+              What happens without a system
             </h2>
             <div className="grid md:grid-cols-2 gap-7 mt-11">
               {services.map((service, index) => (
@@ -60,6 +62,9 @@ const Work = () => {
                 </div>
               ))}
             </div>
+            <p className="text-muted text-18 mt-9">
+              These are predictable outcomes, not random mistakes.
+            </p>
           </motion.div>
           <motion.div {...TopAnimation} className="lg:col-span-5 col-span-12">
             <div className="2xl:-mr-40 mt-9 flex justify-center">

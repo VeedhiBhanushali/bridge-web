@@ -7,11 +7,16 @@ const Platform = () => {
         <div className="bg-white/55 backdrop-blur-sm px-16 py-14 rounded-3xl border border-border/50 grid grid-cols-12 items-center before:content-[''] before:absolute relative before:w-96 before:h-64 before:bg-start before:bg-no-repeat before:-bottom-11 overflow-hidden lg:before:right-48 before:-z-1 before:opacity-10 shadow-sm">
           <div className="lg:col-span-8 col-span-12">
             <h2 className="font-display font-semibold text-midnight_text sm:text-40 text-30 mb-6 tracking-tight">
-              Powered by the <span className="text-primary">Bridge</span> Platform
+              How <span className="text-primary">Bridge</span> works
             </h2>
-            <p className="text-muted text-18">
-              Our platform empowers international students to have safer and more
-              <br /> successful university experiences.
+            <div className="text-muted text-18 space-y-2">
+              <p><span className="font-semibold text-midnight_text">Stage Engine</span> - Knows where you are and what comes next</p>
+              <p><span className="font-semibold text-midnight_text">Today View</span> - Shows what matters right now</p>
+              <p><span className="font-semibold text-midnight_text">Risk Intelligence</span> - Highlights what breaks if you miss something</p>
+              <p><span className="font-semibold text-midnight_text">Data Memory</span> - Learns from real student journeys</p>
+            </div>
+            <p className="text-midnight_text text-18 mt-5">
+              Bridge runs your week based on what&apos;s coming, what&apos;s at risk, and what matters now.
             </p>
           </div>
           <div className="lg:col-span-4 col-span-12">
