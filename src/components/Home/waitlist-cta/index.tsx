@@ -1,5 +1,5 @@
 const WaitlistCta = () => {
-  const SURVEY_FORM_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
+  const SURVEY_FORM_URL = "https://forms.gle/4mrGd4baYdK9hpvw8";
 
   return (
     <section className="pt-8 pb-20 md:pt-10 md:pb-28 relative bg-cream" id="waitlist">

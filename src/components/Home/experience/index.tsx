@@ -5,19 +5,16 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
-  BellRing,
-  CalendarDays,
   Check,
   ChevronRight,
   Clock3,
-  Compass,
   GraduationCap,
   MessageCircleMore,
   Search,
   Users,
 } from "lucide-react";
 
-const RESEARCH_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
+const RESEARCH_URL = "https://forms.gle/4mrGd4baYdK9hpvw8";
 
 const journey = [
   { stage: "Applying", detail: "Applications, funding, documents" },
@@ -28,22 +25,25 @@ const journey = [
 
 const productSteps = [
   {
-    icon: Compass,
+    image: "/images/bridge/student-portal.webp",
+    imageAlt: "International students using a personalized student portal",
     number: "01",
     title: "Bridge learns your stage",
     copy: "The experience starts with where you actually are—not a generic student checklist.",
   },
   {
-    icon: CalendarDays,
+    image: "/images/bridge/student-checklist.webp",
+    imageAlt: "Student checklist connecting mobile tasks with an online portal",
     number: "02",
     title: "Your week gets sequenced",
     copy: "A long journey becomes a short list of actions, ordered around timing and dependencies.",
   },
   {
-    icon: BellRing,
+    image: "/images/bridge/student-networking.webp",
+    imageAlt: "International students meeting and building their campus network",
     number: "03",
-    title: "Important steps surface early",
-    copy: "You see why something matters while there is still time to make a better decision.",
+    title: "The right opportunities surface",
+    copy: "People, events, and resources appear in context—when they can actually move you forward.",
   },
 ];
 
@@ -232,21 +232,29 @@ export default function BridgeExperience() {
           />
 
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
-            {productSteps.map(({ icon: Icon, number, title, copy }, index) => (
+            {productSteps.map(({ image, imageAlt, number, title, copy }, index) => (
               <motion.article
                 key={number}
                 {...visible}
                 transition={{ delay: index * 0.08 }}
-                className="group rounded-[26px] border border-[#E3E5E8] bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-[#B8D9F7] hover:shadow-[0_24px_60px_-38px_rgba(0,100,200,0.45)] sm:p-8"
+                className="group overflow-hidden rounded-[26px] border border-[#E3E5E8] bg-white transition duration-300 hover:-translate-y-1 hover:border-[#B8D9F7] hover:shadow-[0_24px_60px_-38px_rgba(0,100,200,0.45)]"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EAF5FF] text-[#0A84FF]">
-                    <Icon className="h-[22px] w-[22px]" />
-                  </div>
-                  <span className="font-display text-sm font-semibold tracking-[0.12em] text-[#B0B0B5]">{number}</span>
+                <div className="relative aspect-[3/2] overflow-hidden bg-[#F2F8FF]">
+                  <Image
+                    src={image}
+                    alt={imageAlt}
+                    width={640}
+                    height={427}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]"
+                  />
+                  <span className="absolute left-5 top-5 rounded-full border border-white/80 bg-white/90 px-3 py-1.5 font-display text-xs font-bold tracking-[0.12em] text-[#0A84FF] shadow-sm backdrop-blur">
+                    {number}
+                  </span>
                 </div>
-                <h3 className="mt-12 font-display text-2xl font-semibold tracking-[-0.03em] text-[#1D1D1F]">{title}</h3>
-                <p className="mt-4 leading-relaxed text-[#73737A]">{copy}</p>
+                <div className="p-7 sm:p-8">
+                  <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] text-[#1D1D1F]">{title}</h3>
+                  <p className="mt-4 leading-relaxed text-[#73737A]">{copy}</p>
+                </div>
               </motion.article>
             ))}
           </div>

@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import Logo from "../Header/Logo";
 import { headerData } from "../Header/Navigation/menuData";
 
-const EARLY_ACCESS_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
+const EARLY_ACCESS_URL = "https://forms.gle/4mrGd4baYdK9hpvw8";
 
 export default function Footer() {
   return (

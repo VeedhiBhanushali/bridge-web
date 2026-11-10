@@ -8,7 +8,7 @@ import { getImagePrefix } from "@/utils/utils";
 
 const BuyCrypto = lazy(() => import("./buy-form"));
 
-const SURVEY_FORM_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
+const SURVEY_FORM_URL = "https://forms.gle/4mrGd4baYdK9hpvw8";
 
 const Hero = () => {
   const [isBuying, setIsBuyingOpen] = useState(false);

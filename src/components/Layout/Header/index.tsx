@@ -6,7 +6,7 @@ import { ArrowRight, Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import { headerData } from "./Navigation/menuData";
 
-const EARLY_ACCESS_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
+const EARLY_ACCESS_URL = "https://forms.gle/4mrGd4baYdK9hpvw8";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
