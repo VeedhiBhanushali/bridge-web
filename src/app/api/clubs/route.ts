@@ -1,6 +1,8 @@
 // src/app/api/clubs/route.ts
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-static';
+
 const dummyClubs = [
   {
     id: '1',

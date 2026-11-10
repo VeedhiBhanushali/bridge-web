@@ -115,20 +115,26 @@ export const perksData: {
   {
     icon: "/images/perks/icon-support.svg",
     title: "WhatsApp groups",
-    text: "Students rely on chat threads to figure out deadlines and decisions.",
+    text: "Chat threads cobbled together week by week — easy to miss the semester when timing actually matters.",
     space: "lg:mt-8",
   },
   {
     icon: "/images/perks/icon-community.svg",
     title: "Reddit threads",
-    text: "Students crowdsource answers in scattered forums with mixed reliability.",
+    text: "Crowdsourced answers that may be outdated by the next intake cycle.",
     space: "lg:mt-14",
   },
   {
     icon: "/images/perks/icon-academy.svg",
     title: "Senior advice",
-    text: "Shared documents",
+    text: "Informal guidance that slips through unless you ask exactly the right question at the right time.",
     space: "lg:mt-4",
+  },
+  {
+    icon: "/images/perks/icon-support.svg",
+    title: "Shared documents",
+    text: "Static spreadsheets with no alerts — still easy to overlook a CPT or enrollment cutoff.",
+    space: "lg:mt-10",
   },
 ];
 

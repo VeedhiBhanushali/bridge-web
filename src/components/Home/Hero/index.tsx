@@ -6,9 +6,7 @@ import { useEffect, useRef, useState, useCallback, lazy, Suspense } from "react"
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { getImagePrefix } from "@/utils/utils";
 
-// Lazy load waitlist modal; slider loads with Hero to avoid chunk issues
 const BuyCrypto = lazy(() => import("./buy-form"));
-import CardSlider from "./slider";
 
 const SURVEY_FORM_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
 
@@ -56,10 +54,10 @@ const Hero = () => {
 
   return (
     <section
-      className="relative md:pt-28 md:pb-24 py-14 overflow-hidden z-1 bg-cream"
+      className="relative pt-14 pb-16 md:pt-24 md:pb-20 lg:pb-24 overflow-hidden z-1 bg-cream"
       id="main-banner"
     >
-      <div className="container mx-auto lg:max-w-[1400px] px-4 lg:pr-0 relative">
+      <div className="container mx-auto lg:max-w-[1400px] px-4 sm:px-6 lg:pr-0 relative">
         <div className="grid grid-cols-12">
           <motion.div {...leftAnimation} className="lg:col-span-6 col-span-12">
             <div className="flex gap-6 items-center lg:justify-start justify-center mt-7">
@@ -69,9 +67,9 @@ const Hero = () => {
               International students navigate high-stakes decisions with no system.
             </h1>
             <p className="text-muted text-20 lg:text-start text-center mb-10 max-w-2xl">
-              Bridge tells you what matters, when it matters, so you never miss the decisions that shape your future.
+              Know what matters. Before it&apos;s too late.
             </p>
-            <div className="mb-10 rounded-2xl border border-primary/20 bg-primaryLight/20 px-6 py-5 backdrop-blur-sm">
+            <div className="mb-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/12 via-primaryLight/25 to-primary/8 px-6 py-6 shadow-[0_4px_24px_-4px_rgb(91_155_213_/_0.2)] backdrop-blur-sm">
               <p className="font-display font-semibold text-midnight_text text-22 lg:text-start text-center mb-3">
                 One missed step can change your entire trajectory.
               </p>
@@ -120,13 +118,6 @@ const Hero = () => {
             <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-cream to-transparent pointer-events-none"></div>
           </div>
         </motion.div>
-        
-        {/* CardSlider positioned much lower below app store buttons with full width */}
-        <div className="w-full mt-60">
-          <Suspense fallback={<div className="h-80 bg-gray-100 rounded-xl animate-pulse"></div>}>
-            <CardSlider />
-          </Suspense>
-        </div>
       </div>
 
       {/* Waitlist modal */}

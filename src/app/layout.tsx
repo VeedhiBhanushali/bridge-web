@@ -11,33 +11,17 @@ import { AuthProvider } from "@/context/AuthContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import ToasterContext from "@/app/api/contex/ToasetContex";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import React from "react";
 
 const fontSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const fontDisplay = Outfit({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
-// NoSSR wrapper to prevent hydration mismatches
-function NoSSR({ children }: { children: React.ReactNode }) {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return isClient ? <>{children}</> : null;
-}
-
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isDashboardPage, setIsDashboardPage] = useState(false);
-
-  useEffect(() => {
-    setIsDashboardPage(
-      pathname?.startsWith("/dashboard") ||
-        pathname === "/profile" ||
-        pathname === "/login"
-    );
-  }, [pathname]);
+  const isDashboardPage =
+    pathname?.startsWith("/dashboard") ||
+    pathname === "/profile" ||
+    pathname === "/login";
 
   return (
     <ErrorBoundary>
@@ -48,13 +32,9 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
           defaultTheme="light"
         >
           <Aoscompo>
-            <NoSSR>
-              {!isDashboardPage && <Header />}
-            </NoSSR>
+            {!isDashboardPage && <Header />}
             <main>{children}</main>
-            <NoSSR>
-              {!isDashboardPage && <Footer />}
-            </NoSSR>
+            {!isDashboardPage && <Footer />}
             <ScrollToTop />
             <ToasterContext />
           </Aoscompo>
@@ -72,8 +52,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <title>Bridge - Student Success Platform</title>
-        <meta name="description" content="Connect, learn, and thrive in your university journey with Bridge - the ultimate student networking and mentorship platform." />
+        <title>Bridge — Your next move, before it becomes urgent</title>
+        <meta name="description" content="A clear, stage-aware weekly plan for international students navigating academic, immigration, and career decisions." />
+        <meta name="theme-color" content="#f4f8ff" />
       </head>
       <body className={`${fontSans.className} ${fontSans.variable} ${fontDisplay.variable} bg-cream text-midnight_text antialiased`}>
         <LayoutContent>{children}</LayoutContent>

@@ -1,105 +1,62 @@
-import React, { FC } from "react";
 import Link from "next/link";
-import { headerData } from "../Header/Navigation/menuData";
-import { footerlabels } from "@/app/api/data";
-import { Icon } from "@iconify/react";
+import { ArrowUpRight } from "lucide-react";
 import Logo from "../Header/Logo";
+import { headerData } from "../Header/Navigation/menuData";
 
-const Footer: FC = () => {
+const EARLY_ACCESS_URL = "https://forms.gle/dSHh2QcMUfAjEroB8";
+
+export default function Footer() {
   return (
-    <footer className="pt-20 pb-8 bg-primaryLight/20 border-t border-primary/15">
-      <div className="container mx-auto lg:max-w-screen-xl px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16 pb-16">
-          <div className="lg:col-span-5">
+    <footer className="border-t border-[#dce5f1] bg-[#f7f9fc]">
+      <div className="mx-auto max-w-[1240px] px-5 py-12 sm:px-8 sm:py-14 xl:px-0">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+          <div>
             <Logo />
-            <p className="text-muted text-16 mt-4 max-w-sm">
-              Bridge tells you what matters, when it matters, so you never miss the decisions that shape your future.
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#69778e]">
+              Clear, timely guidance for the decisions that shape an international student&apos;s journey.
             </p>
-            <div className="flex gap-4 items-center mt-6">
-              <Link
-                href="#"
-                className="p-2.5 rounded-xl bg-white/60 hover:bg-primary hover:text-white text-midnight_text transition-all duration-200"
-                aria-label="Facebook"
-              >
-                <Icon icon="fa6-brands:facebook-f" width="20" height="20" />
-              </Link>
-              <Link
-                href="#"
-                className="p-2.5 rounded-xl bg-white/60 hover:bg-primary hover:text-white text-midnight_text transition-all duration-200"
-                aria-label="Instagram"
-              >
-                <Icon icon="fa6-brands:instagram" width="20" height="20" />
-              </Link>
-              <Link
-                href="#"
-                className="p-2.5 rounded-xl bg-white/60 hover:bg-primary hover:text-white text-midnight_text transition-all duration-200"
-                aria-label="X Twitter"
-              >
-                <Icon icon="fa6-brands:x-twitter" width="20" height="20" />
-              </Link>
-            </div>
+            <p className="mt-4 text-xs leading-relaxed text-[#8b97aa]">
+              Bridge provides educational guidance, not legal or immigration advice.
+            </p>
           </div>
-          <div className="lg:col-span-2">
-            <h4 className="font-display font-semibold text-midnight_text text-18 mb-5 tracking-tight">Links</h4>
-            <ul className="space-y-3">
-              {headerData.map((item, index) => (
-                <li key={index}>
-                  <Link
-                    href={item.href}
-                    className="text-muted hover:text-primary text-16 transition-colors"
-                  >
+
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b97aa]">Explore</p>
+            <ul className="mt-4 space-y-3">
+              {headerData.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm font-medium text-[#46556e] transition hover:text-[#115fe4]">
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="lg:col-span-2">
-            <h4 className="font-display font-semibold text-midnight_text text-18 mb-5 tracking-tight">Information</h4>
-            <ul className="space-y-3">
-              {footerlabels.map((item, index) => (
-                <li key={index}>
-                  <Link
-                    href={item.herf}
-                    className="text-muted hover:text-primary text-16 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="lg:col-span-3">
-            <h4 className="font-display font-semibold text-midnight_text text-18 mb-5 tracking-tight">Subscribe</h4>
-            <p className="text-muted text-16 mt-1 mb-4">
-              Get the latest news and updates from Bridge.
-            </p>
-            <div className="relative">
-              <input
-                type="email"
-                name="mail"
-                id="mail"
-                placeholder="Enter your email"
-                className="bg-white/80 border border-border rounded-xl py-3.5 pl-5 pr-14 text-midnight_text w-full focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all placeholder:text-muted"
-              />
-              <button
-                type="button"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-2 rounded-lg bg-primary text-white hover:bg-primaryDark transition-colors"
-                aria-label="Subscribe"
+
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b97aa]">Get involved</p>
+            <div className="mt-4 space-y-3">
+              <Link
+                href={EARLY_ACCESS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-1.5 text-sm font-medium text-[#46556e] transition hover:text-[#115fe4]"
               >
-                <Icon icon="tabler:send" width="18" height="18" />
-              </button>
+                Help shape Bridge
+                <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+              <Link href="/login" className="block text-sm font-medium text-[#46556e] transition hover:text-[#115fe4]">
+                Sign in to Bridge
+              </Link>
             </div>
           </div>
         </div>
-        <div className="pt-8 border-t border-primary/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-display font-medium text-muted text-14">
-            © 2025 Bridge. All rights reserved.
-          </p>
+
+        <div className="mt-12 flex flex-col gap-2 border-t border-[#dce5f1] pt-6 text-xs text-[#8b97aa] sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Bridge. Built with international students.</p>
+          <p>Starting at San José State University.</p>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

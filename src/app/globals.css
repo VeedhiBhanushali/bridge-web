@@ -4,7 +4,43 @@
 
 /* `scroll-behavior: smooth` on the root makes long pages feel laggy with wheel/trackpad */
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgb(22 103 255 / 0.18);
+  color: #0c1931;
+}
+
+.bridge-hero {
+  background: #f5faff;
+}
+
+.bridge-grid {
+  background-image:
+    linear-gradient(rgb(64 101 158 / 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(64 101 158 / 0.055) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @layer components {
@@ -32,4 +68,4 @@ html {
   .blog-details h3 {
     @apply mb-6 text-2xl font-bold dark:text-white sm:text-[28px] sm:leading-[40px];
   }
-} 
+}
